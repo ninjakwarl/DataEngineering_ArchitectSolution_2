@@ -1,6 +1,6 @@
-*.rb linguist-detectable=true
+*.ruby linguist-detectable=true
 *.python linguist-detectable=true 
-*.js linguist-detectable=true
+*.javascript linguist-detectable=true
 *.json linguist-detectable=true
 *.html linguist-detectable=true  
-*.bat linguist-detectable=true 
+*.powershell linguist-detectable=true 
