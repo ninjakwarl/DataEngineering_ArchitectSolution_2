@@ -1,2 +1,2 @@
-*.py linguist-vendored=true
-*.ipynb linguist-vendored=true
+*.rb linguist-language=Python
+*.rb linguist-language=Jupyter Notebook
