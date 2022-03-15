@@ -1,0 +1,84 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ksaycon-adf-poc2"
+		},
+		"AzureFuncAppsPython_functionKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'functionKey' of 'AzureFuncAppsPython'"
+		},
+		"pokemondetaildb_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'pokemondetaildb'"
+		},
+		"sourcedata_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'sourcedata'"
+		},
+		"AzureFuncAppsPython_properties_typeProperties_functionAppUrl": {
+			"type": "string",
+			"defaultValue": "https://ksayconfunctionpoc.azurewebsites.net"
+		},
+		"blobtrigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/1920b5d6-1bb5-45ce-b240-ecbd41c49431/resourceGroups/mdm_upskilling_program/providers/Microsoft.Storage/storageAccounts/sayconadlspoc2"
+		},
+		"AZLinkKarl_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://ksayconkeyvault.vault.azure.net/"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ksaycon-adf-poc2_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureFuncAppsPython_functionKey": {
+						"value": "[parameters('AzureFuncAppsPython_functionKey')]"
+					},
+					"pokemondetaildb_connectionString": {
+						"value": "[parameters('pokemondetaildb_connectionString')]"
+					},
+					"sourcedata_connectionString": {
+						"value": "[parameters('sourcedata_connectionString')]"
+					},
+					"AzureFuncAppsPython_properties_typeProperties_functionAppUrl": {
+						"value": "[parameters('AzureFuncAppsPython_properties_typeProperties_functionAppUrl')]"
+					},
+					"AZLinkKarl_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AZLinkKarl_properties_typeProperties_baseUrl')]"
+					},
+					"blobtrigger_properties_typeProperties_scope": {
+						"value": "[parameters('blobtrigger_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
